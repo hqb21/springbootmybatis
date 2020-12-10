@@ -1,0 +1,117 @@
+# 生产环境
+# 配置系统服务
+server:
+  # 项目访问端口号
+  port: 80
+# 配置SpringBoot日志
+logging:
+  file:
+    # 在当前项目中生成指定目录  也可以使用logging.file完整路径 G:/springboot.log
+    path: logs
+  pattern:
+    # 日志输出格式：
+    # %d表示日期时间，
+    # %thread表示线程名，
+    # %-5level：级别从左显示5个字符宽度
+    # %logger{50} 表示logger名字最长50个字符，否则按照句点分割。
+    # %msg：日志消息，
+    # %n是换行符
+    # 在控制台输出的日志的格式  properties文件不需要用单引号括起来
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n'
+    # 指定输出文件中日志输出的格式  properties文件不需要用单引号括起来
+    file: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n'
+# 配置数据库连接服务
+spring:
+  # 配置Mvc视图配置
+  mvc:
+    servlet:
+      # 项目访问上下文
+      path: /springboot
+  #配置数据库连接
+  datasource:
+    #使用的是阿里的druid数据库连接池
+    druid:
+      # 数据库连接基本信息
+      username: root
+      password: passw0rd
+      url: jdbc:mysql://123.56.9.39:3306/pep?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+      driver-class-name: com.mysql.jdbc.Driver
+      # 初始化连接的数量
+      initial-size: 5
+      # 数据库连接的最大数量
+      max-active: 20
+      # 最小连接数
+      min-idle: 5
+      # 获取连接的最大等待时间
+      max-wait: 50000
+      # 是否缓存预编译语句，对支持游标的数据库性能提升巨大
+      pool-prepared-statements: true
+      # 最大缓存预编译语句的数量大小，当大于 0 时，pool-prepared-statements 自动触发修改为 true
+      max-pool-prepared-statement-per-connection-size: 20
+      # 检测连接是否有效的 SQL 语句，一般为查询语句
+      validation-query: select 1 from dual
+      # 检测连接是否有效语句执行超时
+      validation-query-timeout: 50000
+      # 获取连接时检测连接是否有效
+      test-on-borrow: true
+      # 返回连接时检测连接是否有效
+      test-on-return: true
+      # 对空闲连接进行检测，如果空闲时间大于 time-between-eviction-runs-millis 检测连接是否有效
+      test-while-idle: true
+      # 检测空闲连接是否有效的时间间隔
+      time-between-eviction-runs-millis: 50000
+      # 连接的最小生存时间
+      min-evictable-idle-time-millis: 50000
+      # 是否支持异步关闭连接
+      async-close-connection-enable: true
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filters: config,stat,wall
+      # 通过 connectProperties 属性来打开 mergeSql（sql参数化合并） 功能；慢 sql 记录以及密码加密实现
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+      # 合并多个DruidDataSource的监控数据
+      use-global-data-source-stat: true
+      # 设置访问druid监控页的账号和密码,默认没有
+      stat-view-servlet:
+        # 用户名及密码
+        login-username: admin
+        login-password: passw0rd
+        # 白名单 允许那个IP访问  不填则默认允许所有请求访问
+        # allow:
+        # 黑名单 拒绝那个IP访问  不填则默认允许所有请求访问 当白名单和黑名单重复时，黑名单优先级更高
+        # deny:
+        # druid监控页面访问地址   注意下exclusions配置别被拦截了
+        url-pattern: /my/druid/*
+        # 是否启用druid监听后台 默认true
+        enabled: true
+        # druid后台重置统计数据按钮功能是否启用
+        reset-enable: true
+      web-stat-filter:
+        # 添加过滤规则 /*拦截全部
+        url-pattern: /*
+        # 忽略过滤格式
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/my/druid/*"
+        # 是否启动过滤 默认true
+        enabled: true
+  #配置rabbitmq连接
+  rabbitmq:
+    host: 123.56.9.39
+    port: 5672
+    username: admin
+    password: passw0rd
+    # 如若不写'virtual-host'则默认使用 / 默认主机
+    virtual-host: /
+mybatis-plus:
+  # 实体类扫描地址
+  type-aliases-package: com.cn.xb.springbootmybatis.entity
+  # xml扫描，多个目录用逗号或者分号分隔（告诉 mapper接口 所对应的 XML 文件位置）
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
+    map-underscore-to-camel-case: true
+    # 如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段
+    call-setters-on-nulls: true
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      db-type: mysql

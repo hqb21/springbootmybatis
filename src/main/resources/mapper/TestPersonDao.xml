@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.xb.springbootmybatis.dao.TestPersonDao">
+
+    <resultMap id="BaseResultMap" type="com.cn.xb.springbootmybatis.entity.TestPerson">
+        <!--@Table test_person-->
+        <result property="personId" column="person_id" jdbcType="VARCHAR"/>
+        <result property="personName" column="person_name" jdbcType="VARCHAR"/>
+        <result property="personDepartmentId" column="person_department_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          person_id, person_name, person_department_id
+        from pep.test_person
+        where person_id = #{personId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          person_id, person_name, person_department_id
+        from pep.test_person
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          person_id, person_name, person_department_id
+        from pep.test_person
+        <where>
+            <if test="personId != null and personId != ''">
+                and person_id = #{personId}
+            </if>
+            <if test="personName != null and personName != ''">
+                and person_name = #{personName}
+            </if>
+            <if test="personDepartmentId != null and personDepartmentId != ''">
+                and person_department_id = #{personDepartmentId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="personId" useGeneratedKeys="true">
+        insert into pep.test_person(person_name, person_department_id)
+        values (#{personName}, #{personDepartmentId})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update pep.test_person
+        <set>
+            <if test="personName != null and personName != ''">
+                person_name = #{personName},
+            </if>
+            <if test="personDepartmentId != null and personDepartmentId != ''">
+                person_department_id = #{personDepartmentId},
+            </if>
+        </set>
+        where person_id = #{personId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from pep.test_person where person_id = #{personId}
+    </delete>
+
+</mapper>

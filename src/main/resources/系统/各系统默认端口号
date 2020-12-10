@@ -1,0 +1,10 @@
+nginx:80;
+tomcat：8080;
+rabbitmq:
+    5672：默认服务端口;
+    15672：后台管理页面使用的端口;
+mysql:3306;
+elasticsearch:
+    9300：使用tcp客户端连接使用的端口;
+    9200：通过http协议连接es使用的端口;
+redis:6379;
