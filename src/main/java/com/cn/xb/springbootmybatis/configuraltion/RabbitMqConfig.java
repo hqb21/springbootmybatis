@@ -51,7 +51,7 @@ public class RabbitMqConfig {
         此注解只能作用在Bean对象上
      */
     // @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    // 更改RabbitMq序列化方式，将默认的jdk序列化方式改为json序列化
+    // 默认保存对象使用jdk序列化机制，更改RabbitMq序列化方式，将默认的jdk序列化方式改为json序列化
     @Bean
     public MessageConverter messageConverter(){
         // json：Jackson2JsonMessageConverter
