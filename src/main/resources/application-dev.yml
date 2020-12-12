@@ -92,7 +92,7 @@ spring:
         exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/my/druid/*"
         # 是否启动过滤 默认true
         enabled: true
-   #配置rabbitmq连接
+    #配置rabbitmq连接
   rabbitmq:
     host: 123.56.9.39
     port: 5672
@@ -100,6 +100,26 @@ spring:
     password: passw0rd
     # 如若不写'virtual-host'则默认使用 / 默认主机
     virtual-host: /
+  #配置redis连接
+  redis:
+    host: 123.56.9.39
+    port: 6379
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器连接密码（默认为空）
+    password:
+    # 连接超时时间（毫秒）
+    timeout: 5000ms
+    jedis:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制）
+        max-active: 8
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+        # 连接池中的最大空闲连接
+        max-idle: 8
+        # 连接池中的最小空闲连接
+        min-idle: 0
 mybatis-plus:
   # 实体类扫描地址
   type-aliases-package: com.cn.xb.springbootmybatis.entity
