@@ -130,6 +130,18 @@
             <version>3.2.1</version>
         </dependency>
 
+        <!-- poi相关操作Excel表格 -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+
         <!-- 用于创建CSR(证书请求) -->
         <dependency>
             <groupId>org.bouncycastle</groupId>

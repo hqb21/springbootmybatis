@@ -1,11 +1,12 @@
 package com.cn.xb.springbootmybatis.utils;
 
-import com.cn.xb.springbootmybatis.entity.enums.CodeMsgEnum;
+import com.cn.xb.springbootmybatis.entity.enums.HttpStatusCodeMsgEnum;
 
 import java.io.Serializable;
 
 
 public class ServerResponse<T> implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private int status;
     private String msg;
@@ -38,7 +39,7 @@ public class ServerResponse<T> implements Serializable {
 
     // 使之不在json序列化结果当中
     public boolean isSuccess() {
-        return this.status == CodeMsgEnum.SUCCESS.getCode();
+        return this.status == HttpStatusCodeMsgEnum.SUCCESS.getCode();
     }
 
     public int getStatus() {
@@ -54,27 +55,27 @@ public class ServerResponse<T> implements Serializable {
     }
 
     public static <T> ServerResponse<T> createBySuccess() {
-        return new ServerResponse<T>(CodeMsgEnum.SUCCESS.getCode());
+        return new ServerResponse<T>(HttpStatusCodeMsgEnum.SUCCESS.getCode());
     }
 
     public static <T> ServerResponse<T> createBySuccessMessage(String msg) {
-        return new ServerResponse<T>(CodeMsgEnum.SUCCESS.getCode(), msg);
+        return new ServerResponse<T>(HttpStatusCodeMsgEnum.SUCCESS.getCode(), msg);
     }
 
     public static <T> ServerResponse<T> createBySuccess(T data) {
-        return new ServerResponse<T>(CodeMsgEnum.SUCCESS.getCode(), data);
+        return new ServerResponse<T>(HttpStatusCodeMsgEnum.SUCCESS.getCode(), data);
     }
 
     public static <T> ServerResponse<T> createBySuccess(String msg, T data) {
-        return new ServerResponse<T>(CodeMsgEnum.SUCCESS.getCode(), msg, data);
+        return new ServerResponse<T>(HttpStatusCodeMsgEnum.SUCCESS.getCode(), msg, data);
     }
 
     public static <T> ServerResponse<T> createByError() {
-        return new ServerResponse<T>(CodeMsgEnum.SERVER_ERROR.getCode(), CodeMsgEnum.SERVER_ERROR.getMsg());
+        return new ServerResponse<T>(HttpStatusCodeMsgEnum.SERVER_ERROR.getCode(), HttpStatusCodeMsgEnum.SERVER_ERROR.getMsg());
     }
 
     public static <T> ServerResponse<T> createByErrorMessage(String errorMessage) {
-        return new ServerResponse<T>(CodeMsgEnum.SERVER_ERROR.getCode(), errorMessage);
+        return new ServerResponse<T>(HttpStatusCodeMsgEnum.SERVER_ERROR.getCode(), errorMessage);
     }
 
     public static <T> ServerResponse<T> createByErrorCodeMessage(int errorCode, String errorMessage) {
@@ -90,7 +91,7 @@ public class ServerResponse<T> implements Serializable {
      * @return
      */
     public static <T> ServerResponse success() {
-        return new ServerResponse<T>(CodeMsgEnum.SUCCESS.getCode());
+        return new ServerResponse<T>(HttpStatusCodeMsgEnum.SUCCESS.getCode());
     }
 
     /**
@@ -98,11 +99,11 @@ public class ServerResponse<T> implements Serializable {
      * @param codeMsg
      * @return
      */
-    public static <T> ServerResponse error(CodeMsgEnum codeMsg) {
+    public static <T> ServerResponse error(HttpStatusCodeMsgEnum codeMsg) {
         if (codeMsg != null) {
             return new ServerResponse<T>(codeMsg.getCode(), codeMsg.getMsg());
         } else {
-            return error(CodeMsgEnum.SERVER_ERROR);
+            return error(HttpStatusCodeMsgEnum.SERVER_ERROR);
         }
     }
 
