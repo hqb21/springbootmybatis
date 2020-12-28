@@ -44,6 +44,7 @@ public class TestPersonController {
                 body-->放在请求体。请求参数的获取：@RequestBody(代码中接收注解)
                 form（不常用）
  */
+    //@ApiIgnore  可以用在类、方法上，方法参数中，用来屏蔽某些接口或参数，使其不在页面上显示。
     @ApiImplicitParam(name = "id", value = "人员ID", required = true, dataType = "String" , paramType = "path")
     // value：方法名称   notes：方法描述
     @ApiOperation(value="查询人员", notes="通过人员ID查询单条数据")
