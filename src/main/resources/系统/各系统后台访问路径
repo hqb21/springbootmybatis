@@ -1,7 +1,9 @@
 swagger2接口页面:
-    http://123.56.9.39:8080/springbootmybatis/springboot/swagger-ui.html
+    http://localhost:8080/springbootmybatis/springboot/swagger-ui.html
+swagger2接口增加UI页面:
+    http://localhost:8080/springbootmybatis/springboot/doc.html
 druid后台监控页面:
-    http://123.56.9.39:8080/springbootmybatis/my/druid/login.html
+    http://localhost:8080/springbootmybatis/my/druid/login.html
     -- /my/druid为配置文件中url-pattern属性配置;
 RabbitMq后台管理页面:
     http://123.56.9.39:15672

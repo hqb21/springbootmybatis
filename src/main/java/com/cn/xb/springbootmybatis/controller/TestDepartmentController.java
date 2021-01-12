@@ -36,7 +36,7 @@ public class TestDepartmentController {
      required：是否必传
      dataType：传入类型 int、String、实体类、Map等等。。。。
      paramType：header-->放在请求头。请求参数的获取：@RequestHeader(代码中接收注解)
-                query-->用于get请求的参数拼接。请求参数的获取：@RequestParam(代码中接收注解)
+                  -->用于get请求的参数拼接。请求参数的获取：@RequestParam(代码中接收注解)
                 path（用于restful接口）-->请求参数的获取：@PathVariable(代码中接收注解)
                 body-->放在请求体。请求参数的获取：@RequestBody(代码中接收注解)
                 form（不常用）

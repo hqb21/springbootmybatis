@@ -22,6 +22,9 @@ logging:
     file: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n'
 # 配置数据库连接服务
 spring:
+  # 配置这个是可以让游览器直接访问到html
+  resources:
+    static-locations: classpath:/static/
   # 配置Mvc视图配置
   mvc:
     servlet:
